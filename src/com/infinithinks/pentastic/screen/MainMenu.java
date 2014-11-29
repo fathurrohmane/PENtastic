@@ -573,7 +573,6 @@ public class MainMenu implements Screen {
 
 	@Override
 	public void show() {
-		
 		//make engine stuff
 		camera = new OrthographicCamera(Gdx.graphics.getWidth()*2, Gdx.graphics.getHeight()*2);
 		//camera = new OrthographicCamera(1,Gdx.graphics.getHeight()/Gdx.graphics.getWidth());

@@ -6,6 +6,7 @@ import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -102,11 +103,11 @@ public class MainMenuScreen implements Screen {
 				,playButtonTexture.getWidth(),playButtonTexture.getHeight());	
 		
 		backButtonTexture = new Texture(Gdx.files.internal(Constant.resolution+"/menu/backButton.png"));
-		settingButton = new Rectangle(backButtonTexture.getWidth(), Gdx.graphics.getHeight() - backButtonTexture.getHeight()
+		backButton = new Rectangle(0, Gdx.graphics.getHeight() - backButtonTexture.getHeight()
 				,backButtonTexture.getWidth(),backButtonTexture.getHeight());
 		
 		settingButtonTexture = new Texture(Gdx.files.internal(Constant.resolution+"/menu/settingButton.png"));
-		backButton = new Rectangle(Gdx.graphics.getWidth() - settingButtonTexture.getWidth(), Gdx.graphics.getHeight() - settingButtonTexture.getHeight()
+		settingButton = new Rectangle(Gdx.graphics.getWidth() - settingButtonTexture.getWidth(), Gdx.graphics.getHeight() - settingButtonTexture.getHeight()
 				,settingButtonTexture.getWidth(),settingButtonTexture.getHeight());
 		
 		//transition
@@ -184,7 +185,10 @@ public class MainMenuScreen implements Screen {
 			touch.camera.unproject(touch.touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 			if(touch.pointInRectangle(playButton, touch.touchPoint.x, touch.touchPoint.y)){
 				buttonIsPressed = true;
-
+			}
+			
+			if(touch.pointInRectangle(backButton, touch.touchPoint.x, touch.touchPoint.y) || Gdx.input.isKeyPressed(Keys.ESCAPE)){
+				Gdx.app.exit();
 			}
 		}
 	}
@@ -201,19 +205,23 @@ public class MainMenuScreen implements Screen {
 					gearTransitionSprite.getColor().g,
 					gearTransitionSprite.getColor().b,
 					opacity);
-			opacity+=0.001f;
+			opacity+=0.01f;
+			scale+=0.015f;
 			gearTransitionSprite.setScale(scale);
-			scale+=0.001f;
-//			if(gearTransitionSprite.getColor().a >= 1){
-//				buttonIsPressed = false;
-//				gearTransitionSprite.rotate(0f);
-//				gearTransitionSprite.setColor(gearTransitionSprite.getColor().r,
-//						gearTransitionSprite.getColor().g,
-//						gearTransitionSprite.getColor().b,
-//						1f);
-//				gearTransitionSprite.setScale(1f);
+			
+			if(gearTransitionSprite.getColor().a <= 1){
+				//buttonIsPressed = false;
+				System.out.println(gearTransitionSprite.getColor().a);
+				gearTransitionSprite.rotate(0f);
+				gearTransitionSprite.setColor(gearTransitionSprite.getColor().r,
+						gearTransitionSprite.getColor().g,
+						gearTransitionSprite.getColor().b,
+						opacity);
+				gearTransitionSprite.setScale(scale);
 				main.setScreen(new StageSelectScreen(main));
-//			}
+			}else{
+				main.setScreen(new StageSelectScreen(main));
+			}
 		}
 	}
 

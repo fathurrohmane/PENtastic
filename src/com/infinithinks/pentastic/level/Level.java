@@ -23,11 +23,13 @@ import com.infinithinks.others.StopWatch;
 import com.infinithinks.pentastic.GameState;
 import com.infinithinks.pentastic.ObstacleHandler;
 import com.infinithinks.pentastic.PENtasticMain;
+import com.infinithinks.pentastic.PortalHandler;
 import com.infinithinks.pentastic.SoundHandler;
 import com.infinithinks.pentastic.TouchHandler;
 import com.infinithinks.pentastic.entities.Obstacle;
 import com.infinithinks.pentastic.entities.Player;
 import com.infinithinks.pentastic.entities.Point;
+import com.infinithinks.pentastic.entities.Portal;
 import com.infinithinks.pentastic.entities.Track;
 import com.infinithinks.pentastic.screen.HUD;
 
@@ -70,6 +72,9 @@ public class Level implements Screen{
 	//obstcle stuff
 	public ObstacleHandler obstacleHandler;
 	
+	//portal stuff
+	public PortalHandler portalHandler;
+	
 	public int trackId;
 	
 	public Level(PENtasticMain main, int trackId)
@@ -106,6 +111,9 @@ public class Level implements Screen{
 
 		//obstacle
 		obstacleHandler.render(delta, batch);
+		
+		//portal
+		portalHandler.render(delta, batch);
 		
 		//player
 		player.render(delta, batch, camera, touch);
@@ -207,13 +215,14 @@ public class Level implements Screen{
 		
 		//initiating obstacle
 		obstacleHandler = new ObstacleHandler(trackId, this);
+		
+		//initiating portal
+		portalHandler = new PortalHandler(trackId, this);
 	}
 
 	@Override
 	public void hide() {
-
 		dispose();
-		
 	}
 
 	@Override
@@ -255,7 +264,6 @@ public class Level implements Screen{
 			
 			@Override
 			public void endContact(Contact contact) {
-				// TODO Auto-generated method stub
 				System.out.println("Collusion END!");
 			}
 			
@@ -264,6 +272,7 @@ public class Level implements Screen{
 				// TODO Auto-generated method stub
 				Body a = contact.getFixtureA().getBody();
 				Body b = contact.getFixtureB().getBody();
+				
 				System.out.println("Collusion! BEGIN");
 
 				if(a.getUserData() instanceof Track && b.getUserData() instanceof Player)
@@ -275,7 +284,6 @@ public class Level implements Screen{
 					}
 					main.sound.bgm.stop();
 					main.sound.lose.play();
-					
 				}
 				if(a.getUserData() instanceof Point && b.getUserData() instanceof Player)
 				{
@@ -307,8 +315,11 @@ public class Level implements Screen{
 				{
 					System.out.println("Col : Track & Point");
 				}
-				
-				
+				if(a.getUserData() instanceof Portal && b.getUserData() instanceof Player)
+				{
+					System.out.println("Col : Portal And Player");
+					System.out.println(a.getUserData().toString());				
+				}
 			}
 		});
     }

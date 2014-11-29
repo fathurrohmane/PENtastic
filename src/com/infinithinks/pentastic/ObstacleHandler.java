@@ -109,7 +109,17 @@ public class ObstacleHandler {
 			numberOfObstacle = 0;
 			break;
 		case Constant.level_3:
+			//1368.6378 : 1289.1993
+			//1547.2797 : 1085.5974
+			//1284.8771 : 868.8778
 			
+			// -17.203018 : 808.1582
+			
+			createPortalRandom(0, new Vector2(1368,1300), Constant.CLOCKWISE,Constant.FASTPORTALRANDOM);
+			createPortalRandom(1, new Vector2(1570,1085), Constant.CLOCKWISE,Constant.FASTPORTALRANDOM);
+			createPortalRandom(2, new Vector2(1284,868), Constant.CLOCKWISE,Constant.FASTPORTALRANDOM);
+			createPortalRandom(3, new Vector2(-17,808), Constant.CLOCKWISE,Constant.FASTPORTALRANDOM);
+			numberOfObstacle = 3;
 			break;
 		case Constant.level_3_2:
 			
@@ -218,7 +228,10 @@ public class ObstacleHandler {
 			}
 			break;
 		case Constant.level_3:
-			
+			for (int i = 0; i <= numberOfObstacle; i++) 
+			{
+				obstacle[i].render(delta,batch);
+			}
 			break;
 		case Constant.level_3_2:
 			
@@ -302,6 +315,11 @@ public class ObstacleHandler {
 	{
 		obstacle[no] = new Obstacle(this, main.world, main.camera, pos, "obstacleRound",clockwise,speed);
 		obstacle[no].rotation = -10;
+	}
+	
+	public void createPortalRandom(int no, Vector2 pos, int clockwise, float speed)
+	{
+		obstacle[no] = new Obstacle(this, main.world, main.camera, pos, "portalRandom",clockwise,speed);
 	}
 
 }

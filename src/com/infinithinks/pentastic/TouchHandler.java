@@ -81,15 +81,14 @@ public class TouchHandler {
 			speedX = 0;
 			speedY = 0;
 		}
-//		
 //		touchPosX = Gdx.input.getAccelerometerY();
 //		touchPosY = Gdx.input.getAccelerometerX();
 //		
 //		speedX = touchPosX*1.5f;
 //		speedY = touchPosY*1.5f;
-		
-		camera.position.x += speedX;
-		camera.position.y -= speedY;
+//		
+//		camera.position.x += speedX;
+//		camera.position.y -= speedY;
 	}
 	
 	public float getRotationSpeed()

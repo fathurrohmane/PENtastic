@@ -10,18 +10,18 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.infinithinks.others.BodyEditorLoader;
 import com.infinithinks.others.Constant;
 import com.infinithinks.pentastic.GameState;
-import com.infinithinks.pentastic.ObstacleHandler;
+import com.infinithinks.pentastic.PortalHandler;
 
-public class Obstacle {
+public class Portal {
 	
 	//main
-	public ObstacleHandler main;
+	public PortalHandler main;
 	
 	//obstacle stuff
 	public Body obstacleBody;
@@ -37,8 +37,8 @@ public class Obstacle {
 	public Camera camera;
 	
 	//identitiy
-	public String obstacleName;
-	public int obstacleId;
+	public String portalName;
+	public int portalId;
 	public float rotateValue = 0.01f;
 	public float rotation = 0f;
 	public int clockwise;
@@ -50,76 +50,31 @@ public class Obstacle {
 	public float maxX;
 	public float minX;
 	
-	public Obstacle(ObstacleHandler main, World world, Camera camera, Vector2 pos,String obstacle, int clockwise, float speed)
+	//location
+	
+
+	public Portal(PortalHandler main, World world, Camera camera, Vector2 pos,String portal, int clockwise, float speed)
 	{
 		this.main = main;
 		this.world = world;
 		this.camera = camera;
 		this.obstacleBodyPos = pos;
-		this.obstacleName = obstacle;
+		this.portalName = portal;
 		this.clockwise = clockwise;
 		this.rotateValue = speed;
 		
 		createSprite();
 		
-		if(obstacleName == Constant.KINCIR)
+		if(portalName == Constant.PORTALRANDOM)
 		{
-			obstacleId = Constant.KINCIRID;
-			createCustomBody();
-		}else if(obstacleName == Constant.BOX)
-		{
-			obstacleId = Constant.BOXID;
-			createCustomBody();
-		}else if(obstacleName == Constant.MOVETRACK_1)
-		{
-			obstacleId = Constant.MOVETRACK_1ID;
-			createCustomBody();
-		}else if(obstacleName == Constant.MOVETRACK_2)
-		{
-			obstacleId = Constant.MOVETRACK_2ID;
-			createCustomBody();
-		}else if(obstacleName == Constant.CIRCLE_1)
-		{
-			obstacleId = Constant.CIRCLE_1ID;
-			createCustomBody();
-		}else if(obstacleName == Constant.CIRCLE_2)
-		{
-			obstacleId = Constant.CIRCLE_2ID;
-			createCustomBody();
-		}else if(obstacleName == Constant.CIRCLE_3)
-		{
-			obstacleId = Constant.CIRCLE_3ID;
-			createCustomBody();
-		}else if(obstacleName == Constant.KINCIR_2)
-		{
-			obstacleId = Constant.KINCIR_2ID;
-			createCustomBody();
-		}else if(obstacleName == Constant.GEAR)
-		{
-			obstacleId = Constant.GEARID;
-			createCustomBody();
-		}else if(obstacleName == Constant.BOX_2)
-		{
-			obstacleId = Constant.BOX_2ID;
-			createCustomBody();
-		}else if(obstacleName == Constant.BOX_2)
-		{
-			obstacleId = Constant.BOX_2ID;
-			createCustomBody();
-		}else if(obstacleName == Constant.ROUND)
-		{
-			obstacleId = Constant.ROUNDID;
-			createCustomBody();
-		}else if(obstacleName == Constant.PORTALRANDOM)
-		{
-			obstacleId = Constant.PORTALRANDOMID;
-			createCustomBody();
-		}else if(obstacleName == Constant.PORTAL)
-		{
-			obstacleId = Constant.PORTALID;
+			portalId = Constant.PORTALRANDOMID;
 			createCustomBody();
 		}
-		
+		if(portalName == Constant.PORTAL)
+		{
+			portalId = Constant.PORTALID;
+			createCustomBody();
+		}
 		
 		//createCustomBody();
 		
@@ -139,56 +94,7 @@ public class Obstacle {
 			break;
 
 		default:
-			switch (obstacleId) {
-			case Constant.KINCIRID:
-				rotation += rotateValue*clockwise;
-				break;
-			case Constant.BOXID:
-				obstacleBodyPos.y -= rotateValue;
-				if(obstacleBodyPos.y > maxY || obstacleBodyPos.y < minY)
-				{
-					rotateValue *= -1;
-				}
-				break;
-			case Constant.MOVETRACK_1ID:
-				obstacleBodyPos.y -= rotateValue;
-				if(obstacleBodyPos.y > maxY || obstacleBodyPos.y < minY)
-				{
-					rotateValue *= -1;
-				}
-				break;
-			case Constant.MOVETRACK_2ID:
-				obstacleBodyPos.y -= rotateValue;
-				if(obstacleBodyPos.y > maxY || obstacleBodyPos.y < minY)
-				{
-					rotateValue *= -1;
-				}
-				break;
-			case Constant.CIRCLE_1ID:
-				rotation += rotateValue*clockwise;
-				break;
-			case Constant.CIRCLE_2ID:
-				rotation += rotateValue*clockwise;
-				break;
-			case Constant.CIRCLE_3ID:
-				rotation += rotateValue*clockwise;
-				break;
-			case Constant.GEARID:
-				rotation += rotateValue*clockwise;
-				break;
-			case Constant.KINCIR_2ID:
-				rotation += rotateValue*clockwise;
-				break;
-			case Constant.BOX_2ID:
-				obstacleBodyPos.x -= rotateValue;
-				if(obstacleBodyPos.x > maxX || obstacleBodyPos.x < minX)
-				{
-					rotateValue *= -1;
-				}
-				break;
-			case Constant.ROUNDID:
-				rotation += rotateValue*clockwise;
-				break;
+			switch (portalId) {
 			case Constant.PORTALID:
 				rotation += rotateValue*clockwise;
 				break;
@@ -240,7 +146,7 @@ public class Obstacle {
 	public void createCustomBody()
 	{
 		//load body
-		BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("obstacle/"+obstacleName+".json"));
+		BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("obstacle/"+portalName+".json"));
 		
 		//create bodydef
 		BodyDef bd = new BodyDef();
@@ -265,7 +171,7 @@ public class Obstacle {
 	
 	public void createSprite()
 	{
-		obstacleTexture = new Texture(Gdx.files.internal("obstacle/"+obstacleName+".png"));
+		obstacleTexture = new Texture(Gdx.files.internal("obstacle/"+portalName+".png"));
 		obstacleTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		obstacleSprite = new Sprite(obstacleTexture);
 		obstacleSprite.setSize(obstacleTexture.getWidth(), obstacleTexture.getHeight());
