@@ -10,21 +10,27 @@ import com.infinithinks.others.Constant;
 import com.infinithinks.pentastic.level.Level;
 import com.infinithinks.pentastic.screen.LoadingScreen;
 import com.infinithinks.pentastic.screen.MainMenu;
+import com.infinithinks.pentastic.screen.MainMenuScreen;
 import com.infinithinks.pentastic.screen.SplashScreen;
+import com.infinithinks.pentastic.screen.StageSelectScreen;
 
 public class PENtasticMain extends Game {
-
-	public MainMenu mainMenu;
+	//menu screen
+	public MainMenuScreen mainMenu;
+	public StageSelectScreen stageMenu;
+	
 	public Level level;
 	public SoundHandler sound;
 	public AndroidOnlyInterface aInterface;
 	public Preferences saveGame;
 	
+	//enum screen select
+	public enum menuScreen{mainMenu,stageSelect,levelSelectStage1,levelSelectStage2,levelSelectStage3};
+	
 	public PENtasticMain(AndroidOnlyInterface ai)
 	{
 		this.aInterface = ai;
 		//saveGame = Gdx.app.getPreferences("My Preferences");
-		
 	}
 	
 	@Override
@@ -39,7 +45,9 @@ public class PENtasticMain extends Game {
 		sound = new SoundHandler();
 		
 		//initiating
-		mainMenu = new MainMenu(this);
+		mainMenu = new MainMenuScreen(this);
+		stageMenu = new StageSelectScreen(this);
+		
 		setScreen(new SplashScreen(this));
 	}
 
@@ -68,23 +76,23 @@ public class PENtasticMain extends Game {
 		super.resume();
 	}
 	
-	public void changeScreen(int to)
+	public void changeScreen(menuScreen to)
 	{
 		switch (to) {
-		case 0:
-			mainMenu.currentMenu = MainMenu.MAIN_MENU;
+		case mainMenu:
 			setScreen(mainMenu);
 			break;
-		case MainMenu.MAIN_MENU:
-			
-			mainMenu.setCamera(MainMenu.MAIN_MENU);
-			mainMenu.currentMenu = MainMenu.MAIN_MENU;
-			setScreen(mainMenu);
+		case stageSelect:
+			setScreen(new StageSelectScreen(this));
 			break;
-		case MainMenu.LEVEL_MENU:
-			mainMenu.currentMenu = MainMenu.LEVEL_MENU;
-			setScreen(mainMenu);
-			mainMenu.setCamera(MainMenu.LEVEL_MENU);
+		case levelSelectStage1:
+			setScreen(stageMenu);
+			break;
+		case levelSelectStage2:
+			setScreen(stageMenu);
+			break;
+		case levelSelectStage3:
+			setScreen(stageMenu);
 			break;
 
 		default:
