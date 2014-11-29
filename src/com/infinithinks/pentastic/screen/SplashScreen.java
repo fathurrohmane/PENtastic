@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.infinithinks.others.Constant;
 import com.infinithinks.pentastic.PENtasticMain;
+import com.infinithinks.pentastic.PENtasticMain.menuScreen;
 
 public class SplashScreen implements Screen{
 
@@ -62,12 +63,9 @@ public class SplashScreen implements Screen{
 			}else
 			{
 				this.dispose();
-				main.changeScreen(0);
+				main.changeScreen(menuScreen.mainMenu);
 			}
 		}
-		
-		
-		
 	}
 
 	@Override

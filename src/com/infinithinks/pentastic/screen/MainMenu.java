@@ -617,7 +617,6 @@ public class MainMenu implements Screen {
 		tutorialSprite = new Sprite(tutorialTexture);
 		tutorialSprite.setPosition(levelSprite.getX() + tutorialSprite.getWidth(), levelSprite.getY());
 		
-		
 		//setting menu button initial
 		menuText = new BitmapFont(Gdx.files.internal("font/freestylefont.fnt"),Gdx.files.internal("font/freestylefont_0.png"),false);
 		buttonAtlas = new TextureAtlas(Gdx.files.internal(Constant.resolution+"/menu/button/button.atlas"));
@@ -648,7 +647,6 @@ public class MainMenu implements Screen {
 		settingButtonStyle.down = new TextureRegionDrawable(settingButtonRegion);
 		settingButton = new Button();
 		settingButton.setStyle(settingButtonStyle);
-		
 		
 		//stage select button intial
 		stage1Texture = new Texture(Gdx.files.internal(Constant.resolution+"/menu/stage1Button.png"));
@@ -812,9 +810,14 @@ public class MainMenu implements Screen {
 		
 		table.add(backButton).expand().left().top();
 		table.row();
-		table.add(level_0Button).expand();table.add(level_1Button).expand();table.add(level_2Button).expand();table.add(level_3Button).expand();table.add(level_4Button).expand();
-		table.row();
-		table.add(level_5Button).expand();table.add(level_6Button).expand();table.add(level_7Button).expand();
+//		table.add(level_0Button).expand();table.add(level_1Button).expand();table.add(level_2Button).expand();table.add(level_3Button).expand();table.add(level_4Button).expand();
+//		table.row();
+//		table.add(level_5Button).expand();table.add(level_6Button).expand();table.add(level_7Button).expand();
+		table.add(level_0Button).expand();table.add(level_1Button).expand();table.add(level_2Button).expand();
+		table.row();table.add(level_3Button).expand();table.add(level_4Button).expand();table.add(level_5Button).expand();
+		//table.row();
+		//table.add(level_5Button).expand();table.add(level_6Button).expand();table.add(level_7Button).expand();
+		
 		
 	}
 	

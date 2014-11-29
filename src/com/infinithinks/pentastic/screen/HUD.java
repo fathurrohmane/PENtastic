@@ -291,7 +291,7 @@ public class HUD {
 				if(exitButton.isPressed())
 				{
 					main.sound.bgm.stop();
-					main.changeScreen(MainMenu.MAIN_MENU);
+					//main.changeScreen(MainMenu.MAIN_MENU);
 				}
 				if(shareChatOnButton.isPressed() && chatONSTatus)
 				{
@@ -350,7 +350,7 @@ public class HUD {
 				if(exitButton.isPressed())
 				{
 					holdTouch = false;
-					main.changeScreen(MainMenu.MAIN_MENU);
+					//main.changeScreen(MainMenu.MAIN_MENU);
 				}
 				if(shareChatOnButton.isPressed() && chatONSTatus)
 				{
@@ -405,13 +405,13 @@ public class HUD {
 				if(retryButton.isPressed())
 				{
 					holdTouch = false;
-					main.changeScreen(MainMenu.LEVEL_MENU);
+					//main.changeScreen(MainMenu.LEVEL_MENU);
 				}
 				
 				if(exitButton.isPressed())
 				{
 					holdTouch = false;
-					main.changeScreen(MainMenu.MAIN_MENU);
+					//main.changeScreen(MainMenu.MAIN_MENU);
 				}
 				
 				if(shareChatOnButton.isPressed() && chatONSTatus)
