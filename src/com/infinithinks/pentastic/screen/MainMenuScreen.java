@@ -98,7 +98,7 @@ public class MainMenuScreen implements Screen {
 		
 		
 		//setup button
-		playButtonTexture = new Texture(Gdx.files.internal(Constant.resolution+"/menu/home_play.png"));
+		playButtonTexture = new Texture(Gdx.files.internal(Constant.resolution+"/homebuttonplay19.png"));
 		playButton = new Rectangle(Gdx.graphics.getWidth() / 2 - playButtonTexture.getWidth() / 2, Gdx.graphics.getHeight() / 4 - playButtonTexture.getHeight()
 				,playButtonTexture.getWidth(),playButtonTexture.getHeight());	
 		

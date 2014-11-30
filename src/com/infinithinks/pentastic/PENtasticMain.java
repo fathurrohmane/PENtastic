@@ -31,6 +31,9 @@ public class PENtasticMain extends Game {
 	{
 		this.aInterface = ai;
 		//saveGame = Gdx.app.getPreferences("My Preferences");
+//		UPointGenerateClientRuntime uPoint = new UPointGenerateClientRuntime();
+		//apiEmail apiEmail = new ApiEmail();
+		System.out.println("LOL");
 	}
 	
 	@Override

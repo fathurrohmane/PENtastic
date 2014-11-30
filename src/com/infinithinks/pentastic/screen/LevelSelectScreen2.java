@@ -25,7 +25,7 @@ public class LevelSelectScreen2 implements Screen{
 		public SpriteBatch batch;
 		public OrthographicCamera camera;
 		
-		public boolean isNext;
+		public boolean isNext, isPrev;
 		public float velocity;
 		
 		//stage staff
@@ -122,6 +122,12 @@ public class LevelSelectScreen2 implements Screen{
 				touch.camera.unproject(touch.touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 				if(touch.pointInRectangle(RectNext, touch.touchPoint.x, touch.touchPoint.y)){
 					isNext = true;
+					isPrev = false;
+				}
+				
+				if(touch.pointInRectangle(RectPrevious, touch.touchPoint.x, touch.touchPoint.y)){
+					isPrev = true;
+					isNext = false;
 				}
 				
 				if(touch.pointInRectangle(RectangleBack, touch.touchPoint.x, touch.touchPoint.y) || Gdx.input.isKeyPressed(Keys.ESCAPE)){
@@ -149,13 +155,38 @@ public class LevelSelectScreen2 implements Screen{
 				if(touch.pointInRectangle(Rect1_7, touch.touchPoint.x, touch.touchPoint.y)){
 					main.createLevel(Constant.level_2_7);
 				}
+				
+				if(touch.pointInRectangle(Rect1_8, touch.touchPoint.x, touch.touchPoint.y)){
+					main.createLevel(Constant.level_2_8);
+				}
+				
+				if(touch.pointInRectangle(Rect1_9, touch.touchPoint.x, touch.touchPoint.y)){
+					main.createLevel(Constant.level_2_9);
+				}
+				
+				if(touch.pointInRectangle(Rect1_10, touch.touchPoint.x, touch.touchPoint.y)){
+					main.createLevel(Constant.level_2_10);
+				}
 			}
 		}
 		
 		public void transitionPath(){
-			if(isNext){
+			if(isNext && RectPath2.x >  Gdx.graphics.getWidth() / 2 - backgroundTexture.getWidth() / 2){
 				Rect1_1.x -= velocity; Rect1_2.x -= velocity; Rect1_3.x -= velocity; Rect1_4.x -= velocity;
 				Rect1_5.x -= velocity; RectNext.x -= velocity; RectPath.x -= velocity;
+				
+				Rect1_6.x -= velocity; Rect1_7.x -= velocity; Rect1_8.x -= velocity; Rect1_9.x -= velocity;
+				Rect1_10.x -= velocity; RectPrevious.x -= velocity; RectPath2.x -= velocity;
+				
+			}
+			
+			if(isPrev && RectPath2.x <  (Gdx.graphics.getWidth() + Gdx.graphics.getWidth() / 2 - backgroundTexture.getWidth() / 2) ){
+				Rect1_1.x += velocity; Rect1_2.x += velocity; Rect1_3.x += velocity; Rect1_4.x += velocity;
+				Rect1_5.x += velocity; RectNext.x += velocity; RectPath.x += velocity;
+				
+				Rect1_6.x += velocity; Rect1_7.x += velocity; Rect1_8.x += velocity; Rect1_9.x += velocity;
+				Rect1_10.x += velocity; RectPrevious.x += velocity; RectPath2.x += velocity;
+				
 			}
 			
 		}
@@ -174,7 +205,7 @@ public class LevelSelectScreen2 implements Screen{
 			stage = new Stage();
 			Gdx.input.setInputProcessor(stage);
 			
-			velocity = 5f;
+			velocity = 20f;
 			
 			//setup background
 			backgroundTexture = new Texture(Gdx.files.internal(Constant.resolution+"/menu/levelSelect/stage2sublevelback.png"));

@@ -9,7 +9,7 @@ public class Constant {
 	public final static int DIVIDE_SPEED_PLAYER = 25;
 	
 	//Printscreen
-	public final static boolean IS_PRINT = true;
+	public final static boolean IS_PRINT = false;
 	
 	//draw sprite
 	public final static boolean DRAW_SPRITE = true;
